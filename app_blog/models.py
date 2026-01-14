@@ -15,6 +15,25 @@ class Category(models.Model):
         default=''
     )
 
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = 'Категорія для публікацій'
+        verbose_name_plural = 'Категорії для публікацій'
+
+    def __str__(self):
+        return self.category
+
+    def get_absolute_url(self):
+        try:
+            url = reverse(
+                'articles-category-list',
+                kwargs={'slug': self.slug}
+            )
+        except:
+            url = '/'
+        return url
+
     class Meta:
         verbose_name = 'Категорія для публікацій'
         verbose_name_plural = 'Категорії для публікацій'
